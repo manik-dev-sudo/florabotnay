@@ -1,0 +1,17 @@
+{
+  "name": "florabotnay",
+  "version": "1.0.0",
+  "description": "FloraBotany AI - Wild Flower Collection, Identification, Wage Valuation & Rank Appraisal System",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/manik-dev-sudo/florabotnay.git"
+  },
+  "keywords": ["gemini", "ai", "flowers", "botany", "collection", "image-recognition", "vercel"],
+  "author": "Manik",
+  "license": "MIT"
+}

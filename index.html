@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FloraBotany AI — Wild Flower Collection, Vision Identification & Wage Appraisal</title>
+  <meta name="description" content="Collect flowers, upload photos, and use AI Multimodal Vision to identify species, assign rarity ranks, and calculate market wage valuations." />
+  
+  <!-- Modern Typography from Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Cinzel:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- Ambient Background Canvas / Gradients -->
+  <div class="ambient-glow glow-top-left"></div>
+  <div class="ambient-glow glow-bottom-right"></div>
+  <div class="ambient-glow glow-center"></div>
+
+  <!-- Confetti Canvas for High-Rank Celebrations -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Navigation Bar -->
+  <header class="navbar" id="main-nav">
+    <div class="nav-container">
+      <div class="brand-group">
+        <div class="brand-icon">🌸</div>
+        <div>
+          <h1 class="brand-title">FloraBotany <span class="brand-badge">AI</span></h1>
+          <p class="brand-subtitle">The Royal Botanical Guild & Flower Valuation System</p>
+        </div>
+      </div>
+
+      <div class="nav-controls">
+        <div class="nav-stat-pill" title="Accumulated Herbarium Wages">
+          <span class="stat-icon">💰</span>
+          <span class="stat-label">Wage Bank:</span>
+          <span class="stat-val" id="stat-total-wage">$0.00</span>
+        </div>
+
+        <button id="sound-btn" class="icon-btn" title="Toggle Sound FX">
+          <span id="sound-icon">🔊 Audio ON</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Application Body -->
+  <main class="main-content">
+    
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-pill">
+        <span class="pill-dot"></span> Powered by Google Gemini Multimodal Vision Backend
+      </div>
+      <h2 class="hero-heading">
+        Collect Wild Blooms. <br />
+        <span class="gradient-text">Identify & Appraise with AI.</span>
+      </h2>
+      <p class="hero-desc">
+        Photograph or upload any flower you collect in nature. Our server-side AI Vision engine identifies botanical taxonomy, assigns rarity ranks (SSS to D), and calculates market wages based on bloom condition.
+      </p>
+
+      <!-- Instant Specimen Test Presets -->
+      <div class="presets-section">
+        <div class="presets-header">
+          <span>✨ Quick Test with Curated Specimens:</span>
+        </div>
+        <div class="presets-container" id="preset-pills">
+          <!-- Dynamic sample pills generated from data.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Upload & Scanner Studio Section -->
+    <section class="studio-section" id="studio-section">
+      <div class="studio-card">
+        
+        <!-- Drag & Drop Zone -->
+        <div class="drop-zone" id="drop-zone">
+          <div class="drop-illustration">
+            <div class="radar-circle circle-1"></div>
+            <div class="radar-circle circle-2"></div>
+            <div class="drop-icon">📷</div>
+          </div>
+          <h3 class="drop-title">Drop your flower photograph here</h3>
+          <p class="drop-hint">Supports JPEG, PNG, WEBP files up to 15MB</p>
+          
+          <div class="upload-btn-group">
+            <label for="file-input" class="btn btn-primary" id="browse-btn-label">
+              <span>📁 Upload Flower Photo</span>
+              <input type="file" id="file-input" accept="image/*" class="sr-only" />
+            </label>
+            <button type="button" class="btn btn-secondary" id="camera-btn">
+              <span>📸 Use Camera</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Preview & Live Scanning Container -->
+        <div class="preview-container hidden" id="preview-container">
+          <div class="image-wrapper">
+            <img id="preview-img" alt="Flower Specimen Preview" />
+            
+            <!-- Laser Scanning Overlay -->
+            <div class="scan-overlay hidden" id="scan-overlay">
+              <div class="scan-laser"></div>
+              <div class="scan-radar-grid"></div>
+              <div class="scan-badge">
+                <span class="pulse-indicator"></span>
+                <span id="scan-status-text">Engaging Gemini Vision AI...</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="preview-actions">
+            <button type="button" class="btn btn-outline" id="reupload-btn">
+              🔄 Choose Different Flower
+            </button>
+            <button type="button" class="btn btn-emerald" id="analyze-btn">
+              ✨ Appraise Specimen with AI
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Result & Valuation Section -->
+    <section class="result-section hidden" id="result-section">
+      <div class="result-card">
+        
+        <!-- Result Header -->
+        <div class="result-header">
+          <div class="result-badge-row">
+            <span class="res-rank-pill" id="res-rank-badge">Rank S • Legendary</span>
+            <span class="data-source-tag hidden" id="res-source-notice">⚡ Verified via Google Gemini AI Backend</span>
+          </div>
+
+          <div class="bounty-wage-card">
+            <div class="wage-label">ESTIMATED COLLECTOR WAGE VALUATION</div>
+            <div class="wage-amount" id="res-wage-value">$185.00</div>
+            
+            <!-- Wage Breakdown Component -->
+            <div class="wage-breakdown-details">
+              <div class="breakdown-item">
+                <span class="lbl">Base Guild Rate:</span>
+                <span class="val" id="breakdown-base">$120.00</span>
+              </div>
+              <div class="breakdown-item">
+                <span class="lbl">Rarity Multiplier Bonus:</span>
+                <span class="val highlight" id="breakdown-rarity">+$45.00</span>
+              </div>
+              <div class="breakdown-item">
+                <span class="lbl">Fresh Bloom Grade Bonus:</span>
+                <span class="val highlight" id="breakdown-freshness">+$20.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Result Taxonomy Grid -->
+        <div class="taxonomy-grid">
+          <div class="taxonomy-col main-info">
+            <h2 class="res-common-name" id="res-common-name">Sacred Blue Lotus</h2>
+            <p class="res-scientific-name"><em id="res-scientific-name">Nymphaea caerulea</em></p>
+            
+            <div class="spec-chips">
+              <div class="spec-chip">
+                <span class="chip-label">Family</span>
+                <span class="chip-val" id="res-family">Nymphaeaceae</span>
+              </div>
+              <div class="spec-chip">
+                <span class="chip-label">Habitat / Origin</span>
+                <span class="chip-val" id="res-origin">Nile Delta & East Africa</span>
+              </div>
+              <div class="spec-chip">
+                <span class="chip-label">Rarity Score</span>
+                <span class="chip-val gold" id="res-rarity-score">88/100</span>
+              </div>
+              <div class="spec-chip">
+                <span class="chip-label">Freshness Grade</span>
+                <span class="chip-val emerald" id="res-freshness-grade">Grade A+ (Prime)</span>
+              </div>
+              <div class="spec-chip">
+                <span class="chip-label">Bloom State</span>
+                <span class="chip-val" id="res-blooming-condition">Peak Hydro-Blooming</span>
+              </div>
+            </div>
+
+            <div class="info-block">
+              <h4>🌿 Medicinal, Herbal & Cultural Applications</h4>
+              <p id="res-medicinal-uses">Revered across ancient dynasties for calming infusions, aromatics, and spiritual symbolism.</p>
+            </div>
+
+            <div class="info-block">
+              <h4>🌾 Ethical Foraging & Preservation Protocol</h4>
+              <p id="res-foraging-tips">Harvest before direct noon sun. Keep stems hydrated in cool, alkaline water.</p>
+            </div>
+
+            <blockquote class="botanical-quote" id="res-quote">
+              "A flower that rises unblemished from muddy waters, yielding golden stamens of regal purity."
+            </blockquote>
+          </div>
+        </div>
+
+        <!-- Claim & Action Buttons -->
+        <div class="result-actions">
+          <button type="button" class="btn btn-claim" id="add-to-collection-btn">
+            🌿 Claim Wage & Add to Herbarium
+          </button>
+          <button type="button" class="btn btn-secondary" id="scan-another-btn">
+            🔍 Appraise Another Flower
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Herbarium Collection Logbook & Collector Dashboard -->
+    <section class="herbarium-section" id="herbarium-section">
+      <div class="herbarium-header">
+        <div>
+          <h2 class="section-title">Royal Herbarium Collection</h2>
+          <p class="section-subtitle">Your personal treasury of collected floral specimens, earned wages, and taxonomic records.</p>
+        </div>
+
+        <!-- Collection Stats Summary -->
+        <div class="stats-ribbon">
+          <div class="stat-ribbon-card">
+            <span class="ribbon-val" id="stat-total-flowers">0</span>
+            <span class="ribbon-lbl">Specimens Collected</span>
+          </div>
+          <div class="stat-ribbon-card">
+            <span class="ribbon-val" id="stat-rare-count">0</span>
+            <span class="ribbon-lbl">Rare / Mythic</span>
+          </div>
+          <div class="stat-ribbon-card">
+            <span class="ribbon-val" id="stat-highest-rank">None</span>
+            <span class="ribbon-lbl">Highest Rank Tier</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filter & Search Toolbar -->
+      <div class="collection-toolbar">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="search-collection" placeholder="Search by common name, latin genus, or family..." />
+        </div>
+
+        <div class="toolbar-actions">
+          <select id="rank-filter" class="custom-select">
+            <option value="ALL">All Ranks (All Tiers)</option>
+            <option value="Rank SSS">Rank SSS (Mythic)</option>
+            <option value="Rank S">Rank S (Legendary)</option>
+            <option value="Rank A">Rank A (Epic)</option>
+            <option value="Rank B">Rank B (Rare)</option>
+            <option value="Rank C">Rank C (Uncommon)</option>
+            <option value="Rank D">Rank D (Common)</option>
+          </select>
+
+          <button id="export-collection-btn" class="btn btn-sm btn-outline">
+            📥 Export JSON
+          </button>
+          <button id="clear-collection-btn" class="btn btn-sm btn-ghost" title="Clear Herbarium">
+            🧹 Clear
+          </button>
+        </div>
+      </div>
+
+      <!-- Herbarium Grid Display -->
+      <div class="herbarium-grid" id="herbarium-grid">
+        <!-- Rendered dynamically via js/app.js -->
+      </div>
+
+      <!-- Empty State -->
+      <div class="empty-herbarium" id="empty-herbarium">
+        <div class="empty-illustration">🌱</div>
+        <h3>Your Herbarium is Empty</h3>
+        <p>You haven't collected any flowers yet! Upload a photo above or click one of our sample specimens to begin earning wages and climbing the collector ranks.</p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <p>FloraBotany AI • Deployed on Vercel • Google Gemini Multimodal Backend Architecture</p>
+      <div class="rank-guide-legend">
+        <span class="legend-item rank-sss">🌟 SSS Mythic</span>
+        <span class="legend-item rank-s">💎 S Legendary</span>
+        <span class="legend-item rank-a">🔮 A Epic</span>
+        <span class="legend-item rank-b">🥇 B Rare</span>
+        <span class="legend-item rank-c">🥈 C Uncommon</span>
+        <span class="legend-item rank-d">🥉 D Common</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal: Live Camera Capture -->
+  <div class="modal-backdrop hidden" id="camera-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>📸 Live Botanical Camera</h3>
+        <button type="button" class="close-modal-btn" id="close-camera-btn">✕</button>
+      </div>
+      <div class="camera-body">
+        <video id="camera-video" autoplay playsinline muted></video>
+        <canvas id="camera-canvas" class="hidden"></canvas>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-emerald btn-lg" id="capture-btn">
+          📸 Capture Flower Photo
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Botanical Certificate View -->
+  <div class="modal-backdrop hidden" id="detail-modal">
+    <div class="modal-card modal-lg">
+      <div class="modal-header">
+        <h3>📜 Official Botanical Guild Specimen Certificate</h3>
+        <button type="button" class="close-modal-btn" id="close-detail-btn">✕</button>
+      </div>
+      <div id="detail-modal-body" class="detail-body">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Bubble -->
+  <div id="toast" class="toast"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/gemini.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

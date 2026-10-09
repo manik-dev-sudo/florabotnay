@@ -2,10 +2,10 @@
   "name": "florabotnay",
   "version": "1.0.0",
   "description": "FloraBotany AI - Wild Flower Collection, Identification, Wage Valuation & Rank Appraisal System",
-  "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js"
+    "build": "echo 'Build successful'",
+    "dev": "node server.js",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",

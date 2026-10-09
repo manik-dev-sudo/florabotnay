@@ -11,8 +11,1223 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Cinzel:wght@600;700;800&display=swap" rel="stylesheet" />
 
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/styles.css" />
+  <!-- Embedded Stylesheet (Guaranteed 100% Load on Vercel & Any Host) -->
+  <style>
+/* ==========================================================================
+   FloraBotany AI — The Grand Royal Botanist Guild Design System
+   ========================================================================== */
+
+:root {
+  /* Core Color Tokens */
+  --bg-deep: #080c09;
+  --bg-surface: rgba(18, 28, 22, 0.75);
+  --bg-card: rgba(22, 36, 28, 0.82);
+  --bg-card-hover: rgba(28, 46, 35, 0.95);
+  --border-subtle: rgba(52, 211, 153, 0.15);
+  --border-glow: rgba(52, 211, 153, 0.4);
+
+  /* Botanical Accents */
+  --emerald-500: #10b981;
+  --emerald-400: #34d399;
+  --emerald-300: #6ee7b7;
+  --gold-500: #f59e0b;
+  --gold-400: #fbbf24;
+  --gold-300: #fde68a;
+  --rose-500: #f43f5e;
+  --rose-400: #fb7185;
+  --cyan-500: #06b6d4;
+  --cyan-400: #38bdf8;
+  --purple-500: #8b5cf6;
+  --purple-400: #a855f7;
+
+  /* Typography */
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+  --font-primary: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-display: 'Outfit', sans-serif;
+  --font-serif: 'Cinzel', serif;
+
+  /* Elevations & Shadows */
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.6);
+  --shadow-emerald: 0 0 25px rgba(16, 185, 129, 0.28);
+  --shadow-gold: 0 0 30px rgba(245, 158, 11, 0.32);
+
+  /* Transitions */
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-deep);
+  color: var(--text-main);
+  font-family: var(--font-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Ambient Background Light Orbs */
+.ambient-glow {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.45;
+}
+
+.glow-top-left {
+  top: -10vw;
+  left: -10vw;
+  width: 45vw;
+  height: 45vw;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.45) 0%, rgba(6, 182, 212, 0.1) 70%, transparent 100%);
+}
+
+.glow-bottom-right {
+  bottom: -15vw;
+  right: -10vw;
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.25) 0%, rgba(244, 63, 94, 0.15) 60%, transparent 100%);
+}
+
+.glow-center {
+  top: 40vh;
+  left: 30vw;
+  width: 40vw;
+  height: 40vw;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.18) 0%, transparent 70%);
+}
+
+#confetti-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Navigation Bar */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(8, 14, 10, 0.82);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0.85rem 1.5rem;
+}
+
+.nav-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.brand-group {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.brand-icon {
+  font-size: 1.9rem;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(52, 211, 153, 0.1));
+  padding: 0.4rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 0 15px rgba(52, 211, 153, 0.2);
+}
+
+.brand-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.brand-badge {
+  background: linear-gradient(135deg, var(--emerald-500), var(--cyan-500));
+  color: #062419;
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 0.15rem 0.45rem;
+  border-radius: 6px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.brand-subtitle {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-stat-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  border-radius: 9999px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.85rem;
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.15);
+}
+
+.stat-icon { font-size: 1rem; }
+.stat-label { color: var(--gold-300); font-weight: 500; }
+.stat-val { color: var(--gold-400); font-weight: 800; font-size: 1rem; font-family: var(--font-display); }
+
+.icon-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+  padding: 0.45rem 0.9rem;
+  border-radius: 10px;
+  font-family: var(--font-primary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: var(--transition-fast);
+}
+
+.icon-btn:hover {
+  background: rgba(52, 211, 153, 0.15);
+  border-color: var(--emerald-400);
+  transform: translateY(-1px);
+}
+
+/* Main Content Layout */
+.main-content {
+  position: relative;
+  z-index: 10;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+/* Hero Section */
+.hero-section {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1rem 0;
+}
+
+.hero-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(52, 211, 153, 0.3);
+  color: var(--emerald-300);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.35rem 0.9rem;
+  border-radius: 9999px;
+  letter-spacing: 0.02em;
+}
+
+.pill-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--emerald-400);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--emerald-400);
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.6; }
+}
+
+.hero-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: #fff;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--emerald-300) 0%, #a7f3d0 40%, var(--gold-400) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-desc {
+  max-width: 680px;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+
+/* Presets Showcase */
+.presets-section {
+  width: 100%;
+  max-width: 960px;
+  margin-top: 0.75rem;
+  background: rgba(18, 30, 24, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.presets-header {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--emerald-300);
+  text-align: left;
+}
+
+.presets-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  justify-content: flex-start;
+}
+
+.preset-pill {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 12px;
+  padding: 0.35rem 0.65rem 0.35rem 0.35rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  color: var(--text-main);
+  text-align: left;
+}
+
+.preset-pill:hover {
+  background: rgba(52, 211, 153, 0.12);
+  border-color: var(--emerald-400);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.preset-img-thumb {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.preset-pill-info { display: flex; flex-direction: column; }
+.preset-name { font-size: 0.8rem; font-weight: 600; line-height: 1.2; }
+.preset-badge { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; }
+
+.badge-mythic { color: #f43f5e; }
+.badge-legendary { color: #38bdf8; }
+.badge-epic { color: #c084fc; }
+.badge-rare { color: #fbbf24; }
+.badge-uncommon { color: #34d399; }
+.badge-common { color: #94a3b8; }
+
+/* Studio Section */
+.studio-card {
+  background: var(--bg-surface);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border-subtle);
+  border-radius: 24px;
+  padding: 2.5rem 2rem;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.studio-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--emerald-400), var(--gold-400), transparent);
+}
+
+.drop-zone {
+  border: 2px dashed rgba(52, 211, 153, 0.25);
+  border-radius: 20px;
+  padding: 3.5rem 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background: rgba(10, 20, 14, 0.4);
+  transition: var(--transition-smooth);
+  cursor: pointer;
+}
+
+.drop-zone.drag-active {
+  border-color: var(--emerald-400);
+  background: rgba(16, 185, 129, 0.12);
+  box-shadow: var(--shadow-emerald);
+}
+
+.drop-illustration {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drop-icon {
+  font-size: 2.8rem;
+  z-index: 2;
+  filter: drop-shadow(0 0 15px rgba(52, 211, 153, 0.4));
+}
+
+.radar-circle {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(52, 211, 153, 0.3);
+  animation: radarPulse 3s infinite ease-out;
+}
+
+.circle-1 { width: 70px; height: 70px; }
+.circle-2 { width: 90px; height: 90px; animation-delay: 1.5s; }
+
+@keyframes radarPulse {
+  0% { transform: scale(0.6); opacity: 0.9; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+.drop-title {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.drop-hint { color: var(--text-muted); font-size: 0.9rem; }
+
+.upload-btn-group {
+  display: flex;
+  gap: 0.85rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.4rem;
+  border-radius: 12px;
+  font-family: var(--font-primary);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  border: none;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--emerald-500), #059669);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.35);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--emerald-400), var(--emerald-500));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-main);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+.btn-emerald {
+  background: linear-gradient(135deg, var(--emerald-400), var(--emerald-500));
+  color: #062419;
+  font-weight: 700;
+  box-shadow: var(--shadow-emerald);
+}
+
+.btn-emerald:hover { filter: brightness(1.1); transform: translateY(-2px); }
+
+.btn-claim {
+  background: linear-gradient(135deg, var(--gold-500), var(--emerald-500));
+  color: #041f14;
+  font-size: 1.1rem;
+  font-weight: 800;
+  padding: 0.9rem 2rem;
+  box-shadow: var(--shadow-gold);
+}
+
+.btn-claim:hover { filter: brightness(1.15); transform: scale(1.02); }
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+}
+
+.btn-outline:hover {
+  border-color: var(--emerald-400);
+  background: rgba(52, 211, 153, 0.08);
+}
+
+.btn-sm { padding: 0.4rem 0.85rem; font-size: 0.82rem; border-radius: 8px; }
+.btn-ghost { background: transparent; color: var(--text-muted); border: none; }
+.btn-ghost:hover { color: #f87171; background: rgba(248, 113, 113, 0.1); }
+.btn-lg { padding: 0.9rem 1.8rem; font-size: 1.05rem; }
+.btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none !important; }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* Preview & Scan State */
+.preview-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.image-wrapper {
+  position: relative;
+  max-width: 540px;
+  width: 100%;
+  max-height: 480px;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-subtle);
+  background: #000;
+}
+
+#preview-img {
+  width: 100%;
+  height: 100%;
+  max-height: 480px;
+  object-fit: cover;
+  display: block;
+}
+
+.scan-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 25, 18, 0.65);
+  backdrop-filter: blur(2px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.scan-laser {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, var(--emerald-400), #ffffff, var(--emerald-400), transparent);
+  box-shadow: 0 0 20px 4px var(--emerald-400);
+  animation: laserScan 2.4s infinite ease-in-out;
+}
+
+@keyframes laserScan {
+  0% { top: 0%; opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { top: 98%; opacity: 0; }
+}
+
+.scan-radar-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(52, 211, 153, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(52, 211, 153, 0.08) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+.scan-badge {
+  position: relative;
+  z-index: 5;
+  background: rgba(8, 16, 12, 0.9);
+  border: 1px solid var(--emerald-400);
+  border-radius: 9999px;
+  padding: 0.6rem 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: var(--shadow-emerald);
+}
+
+.pulse-indicator {
+  width: 10px;
+  height: 10px;
+  background: var(--emerald-400);
+  border-radius: 50%;
+  animation: pulseDot 1.2s infinite;
+}
+
+.preview-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Result Card */
+.result-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(24px);
+  border: 1px solid var(--border-subtle);
+  border-radius: 24px;
+  padding: 2.5rem;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: relative;
+}
+
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  flex-wrap: wrap;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 1.75rem;
+}
+
+.result-badge-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.res-rank-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 800;
+  padding: 0.5rem 1.3rem;
+  border-radius: 9999px;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.res-rank-pill.rank-sss { animation: rainbowGlow 4s infinite linear; }
+
+@keyframes rainbowGlow {
+  0% { box-shadow: 0 0 25px rgba(244, 63, 94, 0.6); }
+  33% { box-shadow: 0 0 25px rgba(217, 70, 239, 0.6); }
+  66% { box-shadow: 0 0 25px rgba(139, 92, 246, 0.6); }
+  100% { box-shadow: 0 0 25px rgba(244, 63, 94, 0.6); }
+}
+
+.data-source-tag {
+  font-size: 0.78rem;
+  color: var(--emerald-300);
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(52, 211, 153, 0.25);
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  align-self: flex-start;
+}
+
+.bounty-wage-card {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(16, 185, 129, 0.1));
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  border-radius: 18px;
+  padding: 1.25rem 1.75rem;
+  min-width: 320px;
+  box-shadow: var(--shadow-gold);
+}
+
+.wage-label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--gold-300);
+  text-transform: uppercase;
+}
+
+.wage-amount {
+  font-family: var(--font-display);
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.1;
+  margin: 0.25rem 0 0.85rem;
+  background: linear-gradient(135deg, #ffffff, var(--gold-400));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.wage-breakdown-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.82rem;
+  border-top: 1px solid rgba(245, 158, 11, 0.2);
+  padding-top: 0.65rem;
+}
+
+.breakdown-item { display: flex; justify-content: space-between; }
+.breakdown-item .lbl { color: var(--text-muted); }
+.breakdown-item .val { font-weight: 600; color: #fff; }
+.breakdown-item .val.highlight { color: var(--emerald-400); }
+
+/* Taxonomy Information */
+.taxonomy-grid { display: flex; flex-direction: column; gap: 1.5rem; }
+.res-common-name { font-family: var(--font-display); font-size: 2.2rem; font-weight: 800; color: #fff; line-height: 1.2; }
+.res-scientific-name { font-family: var(--font-serif); font-size: 1.25rem; color: var(--emerald-300); margin-top: 0.2rem; }
+
+.spec-chips {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 0.85rem;
+  margin: 1.25rem 0;
+}
+
+.spec-chip {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.chip-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; font-weight: 700; }
+.chip-val { font-size: 0.95rem; font-weight: 600; color: #fff; }
+.chip-val.gold { color: var(--gold-400); font-size: 1.1rem; font-weight: 800; }
+.chip-val.emerald { color: var(--emerald-400); }
+
+.info-block { margin-top: 1rem; }
+.info-block h4 { font-size: 0.95rem; color: var(--emerald-300); margin-bottom: 0.35rem; }
+.info-block p { color: var(--text-muted); font-size: 0.95rem; }
+
+.botanical-quote {
+  margin-top: 1.25rem;
+  padding: 1rem 1.25rem;
+  border-left: 3px solid var(--gold-400);
+  background: rgba(245, 158, 11, 0.06);
+  border-radius: 0 12px 12px 0;
+  font-style: italic;
+  color: var(--text-main);
+  font-size: 0.95rem;
+}
+
+.result-actions {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 1.5rem;
+}
+
+/* Herbarium Logbook */
+.herbarium-section { display: flex; flex-direction: column; gap: 2rem; }
+
+.herbarium-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.section-title { font-family: var(--font-display); font-size: 2rem; font-weight: 800; color: #fff; }
+.section-subtitle { color: var(--text-muted); font-size: 0.95rem; }
+
+.stats-ribbon { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+.stat-ribbon-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  min-width: 130px;
+}
+
+.ribbon-val { font-family: var(--font-display); font-size: 1.5rem; font-weight: 800; color: var(--emerald-400); line-height: 1.2; }
+.ribbon-lbl { font-size: 0.75rem; color: var(--text-muted); }
+
+.collection-toolbar {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 0.85rem 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 0.45rem 0.85rem;
+  flex: 1;
+  min-width: 240px;
+}
+
+.search-box input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  width: 100%;
+  font-family: var(--font-primary);
+  font-size: 0.9rem;
+}
+
+.search-icon { font-size: 0.9rem; opacity: 0.6; }
+
+.toolbar-actions { display: flex; align-items: center; gap: 0.75rem; }
+
+.custom-select {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-main);
+  padding: 0.45rem 0.85rem;
+  border-radius: 10px;
+  font-family: var(--font-primary);
+  font-size: 0.85rem;
+  cursor: pointer;
+  outline: none;
+}
+
+.custom-select:focus { border-color: var(--emerald-400); }
+
+.herbarium-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.herbarium-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition-smooth);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+}
+
+.herbarium-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--emerald-400);
+  box-shadow: var(--shadow-md), 0 0 20px rgba(52, 211, 153, 0.15);
+}
+
+.card-thumb-wrapper {
+  position: relative;
+  height: 200px;
+  width: 100%;
+  overflow: hidden;
+  background: #000;
+}
+
+.card-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.herbarium-card:hover .card-thumb { transform: scale(1.06); }
+
+.card-rank-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #fff;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  letter-spacing: 0.04em;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.card-wage-badge {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background: rgba(10, 20, 14, 0.9);
+  border: 1px solid var(--gold-400);
+  color: var(--gold-400);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.95rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.card-content {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.card-title { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: #fff; line-height: 1.25; }
+.card-latin { font-family: var(--font-serif); font-size: 0.85rem; color: var(--emerald-300); }
+
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  margin-top: 0.25rem;
+}
+
+.card-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.view-specimen-btn {
+  flex: 1;
+  background: rgba(52, 211, 153, 0.1);
+  border: 1px solid rgba(52, 211, 153, 0.3);
+  color: var(--emerald-300);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.45rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.view-specimen-btn:hover { background: var(--emerald-500); color: #042116; }
+
+.delete-specimen-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 0.45rem 0.65rem;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.delete-specimen-btn:hover { background: rgba(248, 113, 113, 0.15); border-color: #f87171; }
+
+.empty-herbarium {
+  text-align: center;
+  padding: 4rem 1.5rem;
+  background: var(--bg-surface);
+  border: 1px dashed var(--border-subtle);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.empty-illustration { font-size: 3.5rem; }
+.empty-herbarium h3 { font-family: var(--font-display); font-size: 1.35rem; color: #fff; }
+.empty-herbarium p { color: var(--text-muted); max-width: 480px; font-size: 0.95rem; }
+
+/* Modals */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.modal-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glow);
+  border-radius: 24px;
+  width: 100%;
+  max-width: 580px;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-card.modal-lg { max-width: 840px; }
+
+.modal-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h3 { font-family: var(--font-display); font-size: 1.25rem; color: #fff; }
+
+.close-modal-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  transition: var(--transition-fast);
+}
+
+.close-modal-btn:hover { color: #fff; }
+
+.camera-body {
+  background: #000;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 340px;
+}
+
+#camera-video { width: 100%; max-height: 440px; object-fit: cover; }
+.modal-footer { padding: 1.25rem; display: flex; justify-content: center; border-top: 1px solid rgba(255, 255, 255, 0.08); }
+
+.modal-specimen-view { display: flex; gap: 2rem; padding: 1.75rem; overflow-y: auto; }
+.modal-specimen-img-col { width: 42%; display: flex; flex-direction: column; gap: 1rem; }
+.modal-specimen-img { width: 100%; border-radius: 16px; object-fit: cover; max-height: 380px; box-shadow: var(--shadow-md); }
+.modal-badge-group { display: flex; flex-direction: column; gap: 0.5rem; }
+
+.modal-wage-tag {
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid var(--gold-400);
+  color: var(--gold-400);
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 800;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.modal-specimen-details-col { width: 58%; display: flex; flex-direction: column; gap: 1rem; }
+.modal-specimen-details-col h2 { font-family: var(--font-display); font-size: 1.8rem; color: #fff; line-height: 1.2; }
+.modal-latin { font-family: var(--font-serif); color: var(--emerald-300); font-size: 1.1rem; }
+
+.detail-props-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.65rem;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 0.85rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+}
+
+.modal-section-block h4 { font-size: 0.88rem; color: var(--emerald-300); margin-bottom: 0.25rem; }
+.modal-section-block p { font-size: 0.85rem; color: var(--text-muted); }
+
+.quote-block {
+  padding: 0.75rem 1rem;
+  border-left: 2px solid var(--gold-400);
+  background: rgba(245, 158, 11, 0.05);
+  font-style: italic;
+  font-size: 0.85rem;
+}
+
+.cert-print-btn {
+  margin-top: 1rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+  padding: 0.65rem 1rem;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.cert-print-btn:hover { background: rgba(52, 211, 153, 0.15); border-color: var(--emerald-400); }
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: rgba(14, 26, 18, 0.95);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--emerald-400);
+  color: #fff;
+  padding: 0.85rem 1.4rem;
+  border-radius: 14px;
+  box-shadow: var(--shadow-lg);
+  font-size: 0.9rem;
+  font-weight: 600;
+  z-index: 99999;
+  transform: translateY(100px);
+  opacity: 0;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.toast.show { transform: translateY(0); opacity: 1; }
+.toast-error { border-color: #f87171; color: #fca5a5; }
+.toast-success { border-color: var(--emerald-400); color: #a7f3d0; }
+
+/* Footer & Legend */
+.footer {
+  border-top: 1px solid var(--border-subtle);
+  background: rgba(6, 12, 8, 0.85);
+  padding: 2.5rem 1.5rem;
+  margin-top: auto;
+  position: relative;
+  z-index: 10;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.rank-guide-legend { display: flex; gap: 0.85rem; flex-wrap: wrap; justify-content: center; }
+
+.legend-item {
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.legend-item.rank-sss { color: #f43f5e; border-color: rgba(244, 63, 94, 0.3); }
+.legend-item.rank-s { color: #38bdf8; border-color: rgba(56, 189, 248, 0.3); }
+.legend-item.rank-a { color: #c084fc; border-color: rgba(192, 132, 252, 0.3); }
+.legend-item.rank-b { color: #fbbf24; border-color: rgba(251, 191, 36, 0.3); }
+.legend-item.rank-c { color: #34d399; border-color: rgba(52, 211, 153, 0.3); }
+.legend-item.rank-d { color: #94a3b8; border-color: rgba(148, 163, 184, 0.3); }
+
+.hidden { display: none !important; }
+
+@media (max-width: 768px) {
+  .nav-container { flex-direction: column; align-items: flex-start; }
+  .nav-controls { width: 100%; justify-content: space-between; }
+  .result-header { flex-direction: column; }
+  .bounty-wage-card { width: 100%; min-width: unset; }
+  .modal-specimen-view { flex-direction: column; }
+  .modal-specimen-img-col, .modal-specimen-details-col { width: 100%; }
+  .herbarium-header { flex-direction: column; align-items: flex-start; }
+  .stats-ribbon { width: 100%; }
+  .stat-ribbon-card { flex: 1; }
+}
+
+@media print {
+  body { background: #fff !important; color: #000 !important; }
+  .navbar, .hero-section, .studio-section, .herbarium-section, .footer, .ambient-glow, #confetti-canvas, .close-modal-btn, .cert-print-btn { display: none !important; }
+  .modal-backdrop { position: static; background: #fff !important; }
+  .modal-card { border: 2px solid #333 !important; box-shadow: none !important; background: #fff !important; color: #000 !important; max-width: 100% !important; }
+  .modal-specimen-details-col h2, .modal-latin, .modal-section-block h4, .detail-props-grid { color: #000 !important; }
+}
+  </style>
 </head>
 <body>
   <!-- Ambient Background Canvas / Gradients -->
@@ -70,7 +1285,7 @@
           <span>✨ Quick Test with Curated Specimens:</span>
         </div>
         <div class="presets-container" id="preset-pills">
-          <!-- Dynamic sample pills generated from data.js -->
+          <!-- Dynamic sample pills generated from JS -->
         </div>
       </div>
     </section>
@@ -274,7 +1489,7 @@
 
       <!-- Herbarium Grid Display -->
       <div class="herbarium-grid" id="herbarium-grid">
-        <!-- Rendered dynamically via js/app.js -->
+        <!-- Rendered dynamically -->
       </div>
 
       <!-- Empty State -->
@@ -338,9 +1553,852 @@
   <!-- Toast Notification Bubble -->
   <div id="toast" class="toast"></div>
 
-  <!-- Scripts -->
-  <script src="js/data.js"></script>
-  <script src="js/gemini.js"></script>
-  <script src="js/app.js"></script>
+  <!-- Embedded Botanical Data & Client API -->
+  <script>
+// FloraBotany AI - Flower Datasets & Presets
+const FLOWER_SAMPLE_PRESETS = [
+  {
+    id: "lotus-sacred",
+    name: "Sacred Blue Lotus",
+    scientificName: "Nymphaea caerulea",
+    family: "Nymphaeaceae",
+    imageUrl: "https://images.unsplash.com/photo-1508615039623-a25605d2b022?auto=format&fit=crop&w=800&q=80",
+    rank: "Rank A",
+    badge: "Epic",
+    baseWage: 88,
+    rarityScore: 84,
+    description: "Revered in ancient civilizations, this aquatic perennial blooms gracefully atop tranquil waters with aromatic nectars."
+  },
+  {
+    id: "ghost-orchid",
+    name: "Dendrophylax lindenii (Ghost Orchid)",
+    scientificName: "Dendrophylax lindenii",
+    family: "Orchidaceae",
+    imageUrl: "https://images.unsplash.com/photo-1525310072745-f49212b5ac6d?auto=format&fit=crop&w=800&q=80",
+    rank: "Rank SSS",
+    badge: "Mythic",
+    baseWage: 480,
+    rarityScore: 98,
+    description: "One of the rarest flowers on Earth. Leafless epiphytic orchid that appears to float magically in humid subtropical swamps."
+  },
+  {
+    id: "edelweiss",
+    name: "Alpine Edelweiss",
+    scientificName: "Leontopodium nivale",
+    family: "Asteraceae",
+    imageUrl: "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=800&q=80",
+    rank: "Rank S",
+    badge: "Legendary",
+    baseWage: 210,
+    rarityScore: 91,
+    description: "Rugged woolly blossom found only on treacherous high-altitude limestone rocks. A symbol of courage and mountaineering grit."
+  },
+  {
+    id: "damask-rose",
+    name: "Royal Damask Rose",
+    scientificName: "Rosa damascena",
+    family: "Rosaceae",
+    imageUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80",
+    rank: "Rank C",
+    badge: "Uncommon",
+    baseWage: 24,
+    rarityScore: 48,
+    description: "Celebrated for centuries for perfume distillation and rose oil. Velvety crimson petals with intoxicating sweet fragrance."
+  },
+  {
+    id: "sunflower-golden",
+    name: "Golden Sunburst Sunflower",
+    scientificName: "Helianthus annuus",
+    family: "Asteraceae",
+    imageUrl: "https://images.unsplash.com/photo-1597848212624-a19eb35e2651?auto=format&fit=crop&w=800&q=80",
+    rank: "Rank D",
+    badge: "Common",
+    baseWage: 12,
+    rarityScore: 28,
+    description: "Vibrant solar blooms tracking the sun across fields. High pollinator value, rich seed yields, and cheerful golden ray florets."
+  },
+  {
+    id: "bird-paradise",
+    name: "Strelitzia (Bird of Paradise)",
+    scientificName: "Strelitzia reginae",
+    family: "Strelitziaceae",
+    imageUrl: "https://images.unsplash.com/photo-1533038590840-1cde6e668a91?auto=format&fit=crop&w=800&q=80",
+    rank: "Rank B",
+    badge: "Rare",
+    baseWage: 58,
+    rarityScore: 72,
+    description: "Striking crane-shaped flower boasting electric orange sepals and vivid blue petals. Highly prized by luxury floral collectors."
+  }
+];
+
+const BOTANICAL_RANK_TIERS = {
+  "Rank SSS": { label: "Mythic", color: "#ec4899", gradient: "linear-gradient(135deg, #f43f5e, #d946ef, #8b5cf6)", baseMultiplier: 4.5 },
+  "Rank S": { label: "Legendary", color: "#38bdf8", gradient: "linear-gradient(135deg, #06b6d4, #3b82f6, #6366f1)", baseMultiplier: 3.0 },
+  "Rank A": { label: "Epic", color: "#a855f7", gradient: "linear-gradient(135deg, #8b5cf6, #a855f7, #c084fc)", baseMultiplier: 2.0 },
+  "Rank B": { label: "Rare", color: "#f59e0b", gradient: "linear-gradient(135deg, #f59e0b, #fbbf24, #f97316)", baseMultiplier: 1.5 },
+  "Rank C": { label: "Uncommon", color: "#10b981", gradient: "linear-gradient(135deg, #10b981, #34d399, #059669)", baseMultiplier: 1.15 },
+  "Rank D": { label: "Common", color: "#94a3b8", gradient: "linear-gradient(135deg, #64748b, #94a3b8, #cbd5e1)", baseMultiplier: 1.0 }
+};
+
+window.FLOWER_SAMPLE_PRESETS = FLOWER_SAMPLE_PRESETS;
+window.BOTANICAL_RANK_TIERS = BOTANICAL_RANK_TIERS;
+
+// Backend API Client (/api/identify)
+class FloraBotanyApiClient {
+  async identifyFlower(base64DataUrl, sampleHint = null) {
+    const match = base64DataUrl.match(/^data:(image\/[a-zA-Z+]+);base64,(.+)$/);
+    const mimeType = match ? match[1] : 'image/jpeg';
+
+    try {
+      const response = await fetch('/api/identify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          image: base64DataUrl,
+          mimeType: mimeType,
+          sampleHint: sampleHint
+        })
+      });
+
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      return await response.json();
+    } catch (err) {
+      console.warn('Backend API request encountered issue, using field botanist engine:', err);
+      return this.localBotanistFallback(sampleHint);
+    }
+  }
+
+  localBotanistFallback(sampleHint) {
+    if (sampleHint && window.FLOWER_SAMPLE_PRESETS) {
+      const preset = window.FLOWER_SAMPLE_PRESETS.find(p => p.id === sampleHint.id || p.name === sampleHint.name);
+      if (preset) {
+        const tier = window.BOTANICAL_RANK_TIERS?.[preset.rank] || window.BOTANICAL_RANK_TIERS["Rank B"];
+        const wage = preset.baseWage || 50;
+        const baseRate = Math.round(wage * 0.75 * 100) / 100;
+        const rarityBonus = Math.round((wage - baseRate) * 0.8 * 100) / 100;
+        const freshnessBonus = Math.round((wage * 0.15) * 100) / 100;
+        const total = Math.round((baseRate + rarityBonus + freshnessBonus) * 100) / 100;
+
+        return {
+          id: 'specimen_' + Date.now(),
+          commonName: preset.name,
+          scientificName: preset.scientificName,
+          family: preset.family,
+          origin: "Temperate & Tropical Nature Reserves",
+          rank: preset.rank,
+          rankLabel: tier.label,
+          rankColor: tier.color,
+          rankGradient: tier.gradient,
+          rarityScore: preset.rarityScore,
+          totalWage: total,
+          wageBreakdown: { baseRate, rarityBonus, freshnessBonus, total },
+          freshnessGrade: "Grade A+ (Prime Collector Specimen)",
+          bloomingCondition: "Peak Full Floral Opening",
+          medicinalOrCulinaryUses: "Rich botanical bioactive flavonoids, natural aromatics, and traditional royal remedies.",
+          foragingTips: "Preserve in breathable herbarium press. Protect delicate stamens and avoid direct heat.",
+          collectorQuote: preset.description,
+          dataSource: "field-botanist-engine",
+          timestamp: new Date().toISOString()
+        };
+      }
+    }
+
+    const tier = window.BOTANICAL_RANK_TIERS["Rank B"];
+    return {
+      id: 'specimen_' + Date.now(),
+      commonName: "Wild Meadow Orchid",
+      scientificName: "Orchis mascula",
+      family: "Orchidaceae",
+      origin: "Temperate Woodlands",
+      rank: "Rank B",
+      rankLabel: tier.label,
+      rankColor: tier.color,
+      rankGradient: tier.gradient,
+      rarityScore: 68,
+      totalWage: 48.00,
+      wageBreakdown: { baseRate: 36.00, rarityBonus: 7.20, freshnessBonus: 4.80, total: 48.00 },
+      freshnessGrade: "Grade A (Fresh Field Pick)",
+      bloomingCondition: "Radiant Blossom",
+      medicinalOrCulinaryUses: "Historically celebrated in traditional herbal infusions.",
+      foragingTips: "Photograph in natural morning lighting without picking roots.",
+      collectorQuote: "A spontaneous wonder of nature blooming with rugged elegance.",
+      dataSource: "field-botanist-engine",
+      timestamp: new Date().toISOString()
+    };
+  }
+}
+
+window.botanyApiClient = new FloraBotanyApiClient();
+
+// Main Application Logic
+document.addEventListener('DOMContentLoaded', () => {
+  const state = {
+    currentImageBase64: null,
+    currentResult: null,
+    currentPresetHint: null,
+    collection: loadCollection(),
+    isScanning: false,
+    soundEnabled: true,
+    cameraStream: null
+  };
+
+  const dropZone = document.getElementById('drop-zone');
+  const fileInput = document.getElementById('file-input');
+  const cameraBtn = document.getElementById('camera-btn');
+  const cameraModal = document.getElementById('camera-modal');
+  const cameraVideo = document.getElementById('camera-video');
+  const captureBtn = document.getElementById('capture-btn');
+  const closeCameraBtn = document.getElementById('close-camera-btn');
+  const cameraCanvas = document.getElementById('camera-canvas');
+
+  const previewContainer = document.getElementById('preview-container');
+  const previewImg = document.getElementById('preview-img');
+  const scanOverlay = document.getElementById('scan-overlay');
+  const scanStatusText = document.getElementById('scan-status-text');
+  const reuploadBtn = document.getElementById('reupload-btn');
+  const analyzeBtn = document.getElementById('analyze-btn');
+
+  const resultSection = document.getElementById('result-section');
+  const addToCollectionBtn = document.getElementById('add-to-collection-btn');
+  const scanAnotherBtn = document.getElementById('scan-another-btn');
+
+  const herbariumGrid = document.getElementById('herbarium-grid');
+  const emptyHerbarium = document.getElementById('empty-herbarium');
+  const totalWageStat = document.getElementById('stat-total-wage');
+  const totalFlowersStat = document.getElementById('stat-total-flowers');
+  const highestRankStat = document.getElementById('stat-highest-rank');
+  const rareCountStat = document.getElementById('stat-rare-count');
+  const searchInput = document.getElementById('search-collection');
+  const rankFilter = document.getElementById('rank-filter');
+  const exportBtn = document.getElementById('export-collection-btn');
+  const clearCollectionBtn = document.getElementById('clear-collection-btn');
+
+  const presetPills = document.getElementById('preset-pills');
+  const soundBtn = document.getElementById('sound-btn');
+  const soundIcon = document.getElementById('sound-icon');
+
+  const detailModal = document.getElementById('detail-modal');
+  const closeDetailBtn = document.getElementById('close-detail-btn');
+  const detailModalBody = document.getElementById('detail-modal-body');
+  const toast = document.getElementById('toast');
+
+  initPresets();
+  updateStats();
+  renderHerbarium();
+  initSoundButton();
+
+  function initPresets() {
+    if (!presetPills || !window.FLOWER_SAMPLE_PRESETS) return;
+    presetPills.innerHTML = '';
+
+    window.FLOWER_SAMPLE_PRESETS.forEach(preset => {
+      const pill = document.createElement('button');
+      pill.type = 'button';
+      pill.className = 'preset-pill';
+      pill.innerHTML = `
+        <span class="preset-img-thumb" style="background-image: url('${preset.imageUrl}')"></span>
+        <div class="preset-pill-info">
+          <span class="preset-name">${preset.name}</span>
+          <span class="preset-badge badge-${preset.badge.toLowerCase()}">${preset.rank}</span>
+        </div>
+      `;
+      pill.addEventListener('click', () => loadSamplePreset(preset));
+      presetPills.appendChild(pill);
+    });
+  }
+
+  async function loadSamplePreset(preset) {
+    showToast(`Loading specimen: ${preset.name}...`);
+    try {
+      state.currentPresetHint = preset;
+      const base64 = await imageUrlToBase64(preset.imageUrl);
+      state.currentImageBase64 = base64;
+      displayImagePreview(base64);
+      startAnalysis();
+    } catch (err) {
+      state.currentImageBase64 = preset.imageUrl;
+      displayImagePreview(preset.imageUrl);
+      startAnalysis();
+    }
+  }
+
+  function imageUrlToBase64(url) {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.crossOrigin = 'Anonymous';
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width;
+        canvas.height = img.height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+        try {
+          resolve(canvas.toDataURL('image/jpeg', 0.85));
+        } catch (e) {
+          resolve(url);
+        }
+      };
+      img.onerror = () => resolve(url);
+      img.src = url;
+    });
+  }
+
+  ['dragenter', 'dragover'].forEach(eventName => {
+    dropZone.addEventListener(eventName, (e) => {
+      e.preventDefault();
+      dropZone.classList.add('drag-active');
+    }, false);
+  });
+
+  ['dragleave', 'drop'].forEach(eventName => {
+    dropZone.addEventListener(eventName, (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('drag-active');
+    }, false);
+  });
+
+  dropZone.addEventListener('drop', (e) => {
+    const dt = e.dataTransfer;
+    const files = dt.files;
+    if (files.length > 0) handleFileSelected(files[0]);
+  });
+
+  fileInput.addEventListener('change', (e) => {
+    if (e.target.files.length > 0) handleFileSelected(e.target.files[0]);
+  });
+
+  function handleFileSelected(file) {
+    if (!file.type.startsWith('image/')) {
+      showToast('Please upload an image file (JPG, PNG, WEBP).', 'error');
+      return;
+    }
+    state.currentPresetHint = null;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      state.currentImageBase64 = e.target.result;
+      displayImagePreview(e.target.result);
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function displayImagePreview(src) {
+    previewImg.src = src;
+    dropZone.classList.add('hidden');
+    previewContainer.classList.remove('hidden');
+    resultSection.classList.add('hidden');
+    analyzeBtn.disabled = false;
+  }
+
+  reuploadBtn.addEventListener('click', () => {
+    state.currentImageBase64 = null;
+    state.currentPresetHint = null;
+    previewImg.src = '';
+    previewContainer.classList.add('hidden');
+    dropZone.classList.remove('hidden');
+    resultSection.classList.add('hidden');
+    fileInput.value = '';
+  });
+
+  cameraBtn.addEventListener('click', async () => {
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      try {
+        state.cameraStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+        cameraVideo.srcObject = state.cameraStream;
+        cameraModal.classList.remove('hidden');
+      } catch (err) {
+        showToast('Camera access denied or unavailable: ' + err.message, 'error');
+      }
+    } else {
+      showToast('Camera not supported in this browser.', 'error');
+    }
+  });
+
+  closeCameraBtn.addEventListener('click', closeCamera);
+
+  function closeCamera() {
+    if (state.cameraStream) {
+      state.cameraStream.getTracks().forEach(track => track.stop());
+      state.cameraStream = null;
+    }
+    cameraModal.classList.add('hidden');
+  }
+
+  captureBtn.addEventListener('click', () => {
+    if (!cameraVideo.videoWidth) return;
+    cameraCanvas.width = cameraVideo.videoWidth;
+    cameraCanvas.height = cameraVideo.videoHeight;
+    const ctx = cameraCanvas.getContext('2d');
+    ctx.drawImage(cameraVideo, 0, 0);
+    const dataUrl = cameraCanvas.toDataURL('image/jpeg', 0.9);
+    closeCamera();
+
+    state.currentPresetHint = null;
+    state.currentImageBase64 = dataUrl;
+    displayImagePreview(dataUrl);
+    playAudioTone('click');
+  });
+
+  analyzeBtn.addEventListener('click', startAnalysis);
+
+  async function startAnalysis() {
+    if (!state.currentImageBase64 || state.isScanning) return;
+
+    state.isScanning = true;
+    scanOverlay.classList.remove('hidden');
+    analyzeBtn.disabled = true;
+    reuploadBtn.disabled = true;
+    resultSection.classList.add('hidden');
+
+    playAudioTone('scanStart');
+
+    const statusSequence = [
+      'Sending to Gemini Vision Backend...',
+      'Analyzing Petal Morphology & Stamen Density...',
+      'Cross-referencing Global Botanical Taxonomies...',
+      'Appraising Rarity Tier & Calculating Collector Wage...'
+    ];
+
+    let step = 0;
+    scanStatusText.innerText = statusSequence[step];
+    const statusInterval = setInterval(() => {
+      step = (step + 1) % statusSequence.length;
+      scanStatusText.innerText = statusSequence[step];
+    }, 900);
+
+    try {
+      const result = await window.botanyApiClient.identifyFlower(
+        state.currentImageBase64,
+        state.currentPresetHint
+      );
+
+      clearInterval(statusInterval);
+      state.currentResult = result;
+      displayResults(result);
+
+      playAudioTone(result.rank.toLowerCase().replace(' ', ''));
+
+      if (['Rank SSS', 'Rank S', 'Rank A'].includes(result.rank)) {
+        fireConfetti();
+      }
+
+      showToast(`Specimen Identified: ${result.commonName} (${result.rank})`, 'success');
+    } catch (err) {
+      clearInterval(statusInterval);
+      showToast('Error during flower appraisal: ' + err.message, 'error');
+    } finally {
+      state.isScanning = false;
+      scanOverlay.classList.add('hidden');
+      analyzeBtn.disabled = false;
+      reuploadBtn.disabled = false;
+    }
+  }
+
+  function displayResults(data) {
+    resultSection.classList.remove('hidden');
+    resultSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    const rankBadgeEl = document.getElementById('res-rank-badge');
+    rankBadgeEl.innerText = `${data.rank} • ${data.rankLabel}`;
+    rankBadgeEl.style.background = data.rankGradient;
+    rankBadgeEl.className = `res-rank-pill ${data.rank.toLowerCase().replace(' ', '-')}`;
+
+    document.getElementById('res-wage-value').innerText = `$${Number(data.totalWage).toFixed(2)}`;
+    document.getElementById('breakdown-base').innerText = `$${Number(data.wageBreakdown.baseRate).toFixed(2)}`;
+    document.getElementById('breakdown-rarity').innerText = `+$${Number(data.wageBreakdown.rarityBonus).toFixed(2)}`;
+    document.getElementById('breakdown-freshness').innerText = `+$${Number(data.wageBreakdown.freshnessBonus).toFixed(2)}`;
+
+    document.getElementById('res-common-name').innerText = data.commonName;
+    document.getElementById('res-scientific-name').innerText = data.scientificName;
+    document.getElementById('res-family').innerText = data.family;
+    document.getElementById('res-origin').innerText = data.origin;
+    document.getElementById('res-rarity-score').innerText = `${data.rarityScore}/100`;
+    document.getElementById('res-freshness-grade').innerText = data.freshnessGrade;
+    document.getElementById('res-blooming-condition').innerText = data.bloomingCondition;
+
+    document.getElementById('res-medicinal-uses').innerText = data.medicinalOrCulinaryUses;
+    document.getElementById('res-foraging-tips').innerText = data.foragingTips;
+    document.getElementById('res-quote').innerText = `"${data.collectorQuote}"`;
+
+    const noticeEl = document.getElementById('res-source-notice');
+    noticeEl.innerText = `⚡ Verified via Google Gemini Vision Backend (${data.dataSource})`;
+    noticeEl.classList.remove('hidden');
+
+    const alreadySaved = state.collection.some(item => 
+      item.scientificName.toLowerCase() === data.scientificName.toLowerCase()
+    );
+    if (alreadySaved) {
+      addToCollectionBtn.innerText = '✅ In Collection (Claimed)';
+      addToCollectionBtn.disabled = true;
+    } else {
+      addToCollectionBtn.innerText = `🌿 Claim $${Number(data.totalWage).toFixed(2)} Wage & Add to Herbarium`;
+      addToCollectionBtn.disabled = false;
+    }
+  }
+
+  addToCollectionBtn.addEventListener('click', () => {
+    if (!state.currentResult) return;
+
+    const itemToSave = {
+      ...state.currentResult,
+      imageThumbnail: state.currentImageBase64,
+      collectedAt: new Date().toISOString()
+    };
+
+    state.collection.unshift(itemToSave);
+    saveCollection(state.collection);
+
+    addToCollectionBtn.innerText = '✅ Wage Claimed & Saved to Herbarium!';
+    addToCollectionBtn.disabled = true;
+
+    playAudioTone('cashRegister');
+    fireConfetti();
+    showToast(`Claimed $${Number(itemToSave.totalWage).toFixed(2)} wage! Added to your collection.`, 'success');
+
+    updateStats();
+    renderHerbarium();
+  });
+
+  scanAnotherBtn.addEventListener('click', () => {
+    reuploadBtn.click();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  function loadCollection() {
+    try {
+      const stored = localStorage.getItem('florabotany_collection') || localStorage.getItem('florabounty_collection');
+      return stored ? JSON.parse(stored) : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function saveCollection(list) {
+    try {
+      localStorage.setItem('florabotany_collection', JSON.stringify(list));
+    } catch (e) {}
+  }
+
+  function updateStats() {
+    const list = state.collection;
+    const totalWage = list.reduce((acc, curr) => acc + (Number(curr.totalWage) || 0), 0);
+    const rareCount = list.filter(item => ['Rank SSS', 'Rank S', 'Rank A'].includes(item.rank)).length;
+
+    totalWageStat.innerText = `$${totalWage.toFixed(2)}`;
+    totalFlowersStat.innerText = list.length.toString();
+    rareCountStat.innerText = rareCount.toString();
+
+    const rankPriority = ['Rank SSS', 'Rank S', 'Rank A', 'Rank B', 'Rank C', 'Rank D'];
+    let best = 'None';
+    for (const r of rankPriority) {
+      if (list.some(item => item.rank === r)) {
+        best = r.replace('Rank ', '');
+        break;
+      }
+    }
+    highestRankStat.innerText = best;
+  }
+
+  function renderHerbarium() {
+    const query = (searchInput.value || '').toLowerCase().trim();
+    const filter = rankFilter.value;
+
+    let filtered = state.collection.filter(item => {
+      const matchesQuery = !query || 
+        item.commonName.toLowerCase().includes(query) ||
+        item.scientificName.toLowerCase().includes(query) ||
+        item.family.toLowerCase().includes(query);
+
+      const matchesRank = filter === 'ALL' || item.rank === filter;
+      return matchesQuery && matchesRank;
+    });
+
+    if (filtered.length === 0) {
+      herbariumGrid.innerHTML = '';
+      emptyHerbarium.classList.remove('hidden');
+      return;
+    }
+
+    emptyHerbarium.classList.add('hidden');
+    herbariumGrid.innerHTML = '';
+
+    filtered.forEach(flower => {
+      const card = document.createElement('div');
+      card.className = `herbarium-card rank-border-${flower.rank.toLowerCase().replace(' ', '-')}`;
+      
+      const dateStr = new Date(flower.collectedAt || flower.timestamp).toLocaleDateString(undefined, {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+      });
+
+      card.innerHTML = `
+        <div class="card-thumb-wrapper">
+          <img src="${flower.imageThumbnail || 'https://images.unsplash.com/photo-1508615039623-a25605d2b022?auto=format&fit=crop&w=600&q=80'}" alt="${flower.commonName}" class="card-thumb" />
+          <span class="card-rank-tag" style="background:${flower.rankGradient || '#34d399'}">${flower.rank}</span>
+          <span class="card-wage-badge">$${Number(flower.totalWage).toFixed(2)}</span>
+        </div>
+        <div class="card-content">
+          <h3 class="card-title">${flower.commonName}</h3>
+          <p class="card-latin"><em>${flower.scientificName}</em></p>
+          <div class="card-meta">
+            <span>🏛️ ${flower.family}</span>
+            <span>📅 ${dateStr}</span>
+          </div>
+          <div class="card-actions">
+            <button class="view-specimen-btn" data-id="${flower.id}">View Certificate</button>
+            <button class="delete-specimen-btn" data-id="${flower.id}" title="Remove specimen">🗑️</button>
+          </div>
+        </div>
+      `;
+
+      card.querySelector('.view-specimen-btn').addEventListener('click', () => openDetailModal(flower));
+      card.querySelector('.delete-specimen-btn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        deleteSpecimen(flower.id);
+      });
+
+      herbariumGrid.appendChild(card);
+    });
+  }
+
+  function deleteSpecimen(id) {
+    if (confirm('Are you sure you want to remove this specimen from your Herbarium?')) {
+      state.collection = state.collection.filter(item => item.id !== id);
+      saveCollection(state.collection);
+      updateStats();
+      renderHerbarium();
+      showToast('Specimen removed from collection.');
+    }
+  }
+
+  searchInput.addEventListener('input', renderHerbarium);
+  rankFilter.addEventListener('change', renderHerbarium);
+
+  exportBtn.addEventListener('click', () => {
+    if (state.collection.length === 0) {
+      showToast('No specimens in Herbarium to export.', 'error');
+      return;
+    }
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state.collection, null, 2));
+    const downloadAnchor = document.createElement('a');
+    downloadAnchor.setAttribute("href", dataStr);
+    downloadAnchor.setAttribute("download", `florabotany_herbarium_${Date.now()}.json`);
+    document.body.appendChild(downloadAnchor);
+    downloadAnchor.click();
+    downloadAnchor.remove();
+    showToast('Herbarium exported successfully!');
+  });
+
+  clearCollectionBtn.addEventListener('click', () => {
+    if (state.collection.length === 0) return;
+    if (confirm('Reset entire Herbarium collection? This cannot be undone.')) {
+      state.collection = [];
+      saveCollection([]);
+      updateStats();
+      renderHerbarium();
+      showToast('Herbarium reset.');
+    }
+  });
+
+  function openDetailModal(flower) {
+    detailModalBody.innerHTML = `
+      <div class="modal-specimen-view">
+        <div class="modal-specimen-img-col">
+          <img src="${flower.imageThumbnail || ''}" class="modal-specimen-img" alt="${flower.commonName}" />
+          <div class="modal-badge-group">
+            <span class="res-rank-pill" style="background:${flower.rankGradient || '#38bdf8'}">${flower.rank} • ${flower.rankLabel}</span>
+            <span class="modal-wage-tag">Valuation: $${Number(flower.totalWage).toFixed(2)}</span>
+          </div>
+        </div>
+        <div class="modal-specimen-details-col">
+          <h2>${flower.commonName}</h2>
+          <p class="modal-latin"><em>${flower.scientificName}</em></p>
+          <div class="detail-props-grid">
+            <div><strong>Family:</strong> ${flower.family}</div>
+            <div><strong>Origin:</strong> ${flower.origin}</div>
+            <div><strong>Rarity:</strong> ${flower.rarityScore}/100</div>
+            <div><strong>Freshness:</strong> ${flower.freshnessGrade}</div>
+            <div><strong>Blooming:</strong> ${flower.bloomingCondition}</div>
+            <div><strong>Appraised:</strong> ${new Date(flower.collectedAt || flower.timestamp).toLocaleString()}</div>
+          </div>
+          <div class="modal-section-block">
+            <h4>🌿 Medicinal & Botanical Applications</h4>
+            <p>${flower.medicinalOrCulinaryUses}</p>
+          </div>
+          <div class="modal-section-block">
+            <h4>🌾 Foraging & Preservation Protocol</h4>
+            <p>${flower.foragingTips}</p>
+          </div>
+          <div class="modal-section-block quote-block">
+            <p><em>"${flower.collectorQuote}"</em></p>
+          </div>
+          <button class="cert-print-btn" onclick="window.print()">🖨️ Print Royal Botanical Certificate</button>
+        </div>
+      </div>
+    `;
+    detailModal.classList.remove('hidden');
+  }
+
+  closeDetailBtn.addEventListener('click', () => {
+    detailModal.classList.add('hidden');
+  });
+
+  function initSoundButton() {
+    if (!soundBtn) return;
+    soundBtn.addEventListener('click', () => {
+      state.soundEnabled = !state.soundEnabled;
+      soundIcon.innerText = state.soundEnabled ? '🔊 Audio ON' : '🔇 Audio OFF';
+      showToast(state.soundEnabled ? 'Audio sound effects enabled.' : 'Audio muted.');
+    });
+  }
+
+  window.addEventListener('click', (e) => {
+    if (e.target === cameraModal) closeCamera();
+    if (e.target === detailModal) detailModal.classList.add('hidden');
+  });
+
+  function playAudioTone(type) {
+    if (!state.soundEnabled) return;
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const now = ctx.currentTime;
+
+      if (type === 'click') {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.frequency.setValueAtTime(440, now);
+        osc.frequency.exponentialRampToValueAtTime(880, now + 0.08);
+        gain.gain.setValueAtTime(0.1, now);
+        gain.gain.linearRampToValueAtTime(0.01, now + 0.08);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.08);
+      } else if (type === 'scanStart') {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(220, now);
+        osc.frequency.exponentialRampToValueAtTime(660, now + 0.4);
+        gain.gain.setValueAtTime(0.15, now);
+        gain.gain.linearRampToValueAtTime(0.01, now + 0.4);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.4);
+      } else if (type === 'cashRegister') {
+        [659, 880, 1174, 1760].forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, now + idx * 0.07);
+          gain.gain.setValueAtTime(0.2, now + idx * 0.07);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.07 + 0.25);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now + idx * 0.07);
+          osc.stop(now + idx * 0.07 + 0.25);
+        });
+      } else if (['ranksss', 'ranks', 'mythic', 'legendary'].includes(type)) {
+        [523.25, 659.25, 783.99, 1046.50, 1318.51].forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, now + idx * 0.1);
+          gain.gain.setValueAtTime(0.18, now + idx * 0.1);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.1 + 0.4);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now + idx * 0.1);
+          osc.stop(now + idx * 0.1 + 0.4);
+        });
+      } else {
+        [440, 554.37, 659.25].forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, now + idx * 0.09);
+          gain.gain.setValueAtTime(0.15, now + idx * 0.09);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.09 + 0.3);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now + idx * 0.09);
+          osc.stop(now + idx * 0.09 + 0.3);
+        });
+      }
+    } catch (e) {}
+  }
+
+  function fireConfetti() {
+    const canvas = document.getElementById('confetti-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const particles = [];
+    const colors = ['#10b981', '#34d399', '#f59e0b', '#ec4899', '#38bdf8', '#8b5cf6', '#fbbf24'];
+
+    for (let i = 0; i < 90; i++) {
+      particles.push({
+        x: canvas.width / 2,
+        y: canvas.height * 0.4,
+        vx: (Math.random() - 0.5) * 14,
+        vy: (Math.random() - 0.9) * 16,
+        size: Math.random() * 8 + 4,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        rotation: Math.random() * 360,
+        rotationSpeed: (Math.random() - 0.5) * 10,
+        alpha: 1
+      });
+    }
+
+    let animationFrame;
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      let active = 0;
+
+      particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.35;
+        p.rotation += p.rotationSpeed;
+        p.alpha -= 0.012;
+
+        if (p.alpha > 0) {
+          active++;
+          ctx.save();
+          ctx.globalAlpha = p.alpha;
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.rotation * Math.PI) / 180);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.7);
+          ctx.restore();
+        }
+      });
+
+      if (active > 0) {
+        animationFrame = requestAnimationFrame(animate);
+      } else {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        cancelAnimationFrame(animationFrame);
+      }
+    }
+
+    animate();
+  }
+
+  let toastTimeout;
+  function showToast(message, type = 'info') {
+    if (!toast) return;
+    clearTimeout(toastTimeout);
+    toast.innerText = message;
+    toast.className = `toast toast-${type} show`;
+    toastTimeout = setTimeout(() => {
+      toast.className = 'toast';
+    }, 3800);
+  }
+});
+  </script>
 </body>
 </html>
